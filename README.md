@@ -1,50 +1,106 @@
-# React + TypeScript + Vite
+# PrestaGest - Sistema de Gestión de Préstamos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![React](https://img.shields.io/badge/React-18.3-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
+![Tauri](https://img.shields.io/badge/Tauri-2.0-purple)
+![Vite](https://img.shields.io/badge/Vite-5.0-yellow)
 
-Currently, two official plugins are available:
+Sistema completo de gestión de préstamos desarrollado con React, TypeScript y Tauri para aplicaciones de escritorio.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Características
 
-## Expanding the ESLint configuration
+- [ ] **Gestión de Clientes** - Registro y seguimiento de clientes
+- [ ] **Sistema de Préstamos** - Cálculo de cuotas e intereses
+- [ ] **Panel de Administración** - Dashboard con métricas
+- [ ] **Reportes y Estadísticas** - Generación de reportes financieros
+- [ ] **Backend Integrado** - API REST con autenticación JWT
+- [ ] **Aplicación de Escritorio** - Build nativo con Tauri
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 🛠️ Tecnologías Utilizadas
 
-- Configure the top-level `parserOptions` property like this:
+### Frontend
+- **React 18** - Biblioteca de interfaz de usuario
+- **TypeScript** - Tipado estático
+- **Vite** - Build tool y dev server
+- **Tailwind CSS** - Framework de estilos
+- **React Router** - Navegación entre vistas
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Backend
+- **Rust** - Lenguaje del backend
+- **Tauri** - Framework para aplicaciones de escritorio
+- **Axum** - Framework web para APIs
+- **Diesel** - ORM para base de datos
+- **SQLite** - Base de datos principal
+
+## 📦 Instalación
+
+```bash
+# Clonar el repositorio
+git clone https://github.com/VictorHerdz10/PrestaGest-with-Tauri.git
+cd PrestaGest-with-Tauri
+
+# Instalar dependencias
+npm install
+
+# Ejecutar en modo desarrollo
+npm run tauri dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## 🏗️ Estructura del Proyecto
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
 ```
+src/
+├── components/     # Componentes reutilizables
+├── pages/         # Vistas principales
+├── hooks/         # Custom hooks de React
+├── types/         # Definiciones de TypeScript
+├── utils/         # Funciones utilitarias
+└── styles/        # Estilos globales
+```
+
+## 🚧 Estado del Proyecto
+
+### ✅ Completado
+- [ ] Configuración inicial del proyecto
+- [ ] Estructura base con React + TypeScript
+- [ ] Integración con Tauri
+
+### 🔄 En Desarrollo
+- [ ] Diseño del sistema de autenticación
+- [ ] Componentes base de la UI
+- [ ] Configuración de la base de datos
+
+### 📋 Próximas Features
+- [ ] Módulo de clientes
+- [ ] Sistema de préstamos
+- [ ] Panel de administración
+- [ ] Generación de reportes
+- [ ] Build de producción
+
+## 🤝 Contribución
+
+Las contribuciones son bienvenidas. Por favor:
+
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+## 📝 Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+
+## 👨‍💻 Autor
+
+**Victor Herdz** - [VictorHerdz10](https://github.com/VictorHerdz10)
+
+## 📞 Contacto
+
+- GitHub: [@VictorHerdz10](https://github.com/VictorHerdz10)
+- Issues: [Reportar un problema](https://github.com/VictorHerdz10/PrestaGest-with-Tauri/issues)
+
+---
+
+
+> **Nota:** Este proyecto está en desarrollo activo. La documentación se actualizará a medida que avance el desarrollo.
