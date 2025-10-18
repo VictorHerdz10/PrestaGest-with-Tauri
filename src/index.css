@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@layer base {
+  @keyframes blob-move {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    25% {
+      transform: translate(40px, -60px) scale(1.1);
+    }
+    50% {
+      transform: translate(-30px, 40px) scale(0.9);
+    }
+    75% {
+      transform: translate(20px, 30px) scale(1.05);
+    }
+  }
+
+  .animate-blob-move {
+    animation: blob-move 8s infinite ease-in-out;
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .animation-delay-3000 {
+    animation-delay: 3s;
+  }
+
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+}
+
+/* Estilos para la barra de título personalizada */
+.titlebar {
+  -webkit-app-region: drag;
+  position: fixed; /* Añadir esto */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Asegurar que esté por encima de todo */
+}
+
+.titlebar button {
+  -webkit-app-region: no-drag;
+}
+
+/* Asegurar que el contenido principal no quede detrás de la barra de título */
+.main-content {
+  margin-top: 2rem; /* Altura de la barra de título */
+}
+
+/* Añadir esta clase para el contenido principal */
+.content-with-titlebar {
+  padding-top: 2rem; /* Compensar la altura del TitleBar */
+}
