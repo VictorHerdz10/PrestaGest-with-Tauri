@@ -1,9 +1,10 @@
 # PrestaGest - Sistema de Gestión de Préstamos
 
-![React](https://img.shields.io/badge/React-18.3-blue)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
-![Tauri](https://img.shields.io/badge/Tauri-2.0-purple)
-![Vite](https://img.shields.io/badge/Vite-5.0-yellow)
+
+![React](https://img.shields.io/badge/React-18.3-61DAFB?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?logo=typescript&logoColor=white)
+![Tauri](https://img.shields.io/badge/Tauri-2.0-FFC131?logo=tauri&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-6.0-646CFF?logo=vite&logoColor=white)
 
 Sistema completo de gestión de préstamos desarrollado con React, TypeScript y Tauri para aplicaciones de escritorio.
 
