@@ -1,24 +1,35 @@
+// routes.rs
 use axum::{
-    middleware, response::Json, routing::get, Router
+    middleware, 
+    response::Json, 
+    routing::get, 
+    Router
 };
 use serde_json::{Value, json};
 
-use crate::server::presentation::{middleware::jwt_middleware, routes::api_routes::api_routes};
+use crate::server::presentation::{
+    middleware::{
+        timing_middleware,
+        rate_limit::{normal_rate_limit, strict_rate_limit}
+    },
+    routes::api_routes::api_routes,
+};
 
-
-/// Configura todas las rutas de la aplicación
 pub fn configure_routes() -> Router {
     Router::new()
-        // Ruta de health check
-        .route("/health", get(health_check))
-        // Ruta de ejemplo
-        .route("/api/hello", get(hello_world))
-        .layer(middleware::from_fn(jwt_middleware::jwt_middleware)) 
-        // API routes (auth, users, etc.)
-        .nest("/api", api_routes())
+    
+    .route("/health", get(health_check)
+        .layer(middleware::from_fn(strict_rate_limit))) 
+    
+    
+    .route("/api/hello", get(hello_world)
+        .layer(middleware::from_fn(normal_rate_limit)))  
+    
+    .nest("/api", api_routes())
+    .layer(middleware::from_fn(timing_middleware))
 }
 
-/// Endpoint de health check
+
 async fn health_check() -> Json<Value> {
     Json(json!({
         "status": "ok",
@@ -26,7 +37,7 @@ async fn health_check() -> Json<Value> {
     }))
 }
 
-/// Endpoint de ejemplo
+
 async fn hello_world() -> Json<Value> {
     Json(json!({
         "message": "¡Hola desde el servidor Axum!"
