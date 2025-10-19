@@ -1,7 +1,7 @@
 [package]
 name = "prestagest"
 version = "1.0.0"
-description = "A Tauri App"
+description = "Una aplicación para gestionar los prestamos y llevar registros detallados de las finanzas"
 authors = ["Victor Hernandez Salcedo"]
 edition = "2021"
 
