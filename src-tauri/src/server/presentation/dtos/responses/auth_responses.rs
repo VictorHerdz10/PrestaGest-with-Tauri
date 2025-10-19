@@ -5,12 +5,6 @@ use crate::server::domain::entities::user::User;
 pub struct AuthResponse {
     pub access_token: String,
 }
-#[derive(Debug, Serialize)]
-pub struct RegisterResponse {
-    pub status_code: u16,
-    pub message: String,
-    pub error: String,
-}
 
 #[derive(Debug, Serialize)]
 pub struct UserResponse {
@@ -36,17 +30,6 @@ impl AuthResponse {
     pub fn from_user_and_token( token: String) -> Self {
         Self {
             access_token: token,
-        }
-    }
-}
-
-
-impl RegisterResponse {
-    pub fn success() -> Self {
-        Self {
-            status_code: 201,
-            message: "Usuario registrado exitosamente".to_string(),
-            error: "created".to_string(),
         }
     }
 }
