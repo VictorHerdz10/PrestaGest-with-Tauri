@@ -22,7 +22,7 @@ export const authService = {
         "/auth/login",
         data
       );
-      localStorage.setItem("accessToken", response.data.accessToken);
+      localStorage.setItem("access_token", response.data.access_token);
       return response.data;
     } catch (error) {
       if (isApiError<LoginErrorResponse>(error)) {
@@ -74,7 +74,7 @@ export const authService = {
       const response = await api.get<User>("/auth/authenticate");
       return response.data;
     } catch (error) {
-      localStorage.removeItem("accessToken");
+      localStorage.removeItem("access_token");
 
       if (isApiError<ErrorApi>(error)) {
         return (
@@ -95,10 +95,10 @@ export const authService = {
   },
 
   logout(): void {
-    localStorage.removeItem("accessToken");
+    localStorage.removeItem("access_token");
   },
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem("accessToken");
+    return !!localStorage.getItem("access_token");
   },
 };

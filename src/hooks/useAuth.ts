@@ -38,7 +38,7 @@ export function useAuth() {
   const loginMutation = useMutation({
     mutationFn: (data: LoginForm) => authService.login(data),
     onSuccess: (data) => {
-      if ("accessToken" in data) {
+      if ("access_token" in data) {
         authQuery.refetch().then(({ data: userData }) => {
           if (userData) {
             navigate("/dashboard");
