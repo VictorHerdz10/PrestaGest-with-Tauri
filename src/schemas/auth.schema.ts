@@ -37,7 +37,7 @@ export type AuthUser = {
 };
 
 export type AuthResponse = {
-  accessToken: string;
+  access_token: string;
 };
 export type RegisterResponse = {
   statusCode: number;
