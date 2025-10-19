@@ -3013,6 +3013,7 @@ dependencies = [
  "diesel_migrations",
  "dotenvy",
  "jsonwebtoken",
+ "lazy_static",
  "log",
  "once_cell",
  "r2d2",
