@@ -1,12 +1,11 @@
-use axum::{Router, middleware};
+// api_routes.rs
+use crate::server::presentation::middleware::jwt_middleware;
 use crate::server::presentation::routes::{auth_routes, user_routes};
-use crate::server::presentation::middleware::{timing_middleware, jwt_middleware};
+use axum::{middleware, Router};
 
-/// Configura todas las rutas de la API
 pub fn api_routes() -> Router {
     Router::new()
         .nest("/auth", auth_routes::auth_routes())
         .nest("/users", user_routes::user_routes())
-        .layer(middleware::from_fn(timing_middleware))
-        .layer(middleware::from_fn(jwt_middleware::jwt_middleware)) // ✅ Agregar middleware JWT
+        .layer(middleware::from_fn(jwt_middleware::jwt_middleware))
 }
