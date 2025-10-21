@@ -1,38 +1,77 @@
-use crate::server::domain::entities::user::{User, NewUser};
+use crate::server::application::requests::auth_model_requests::{LoginUserRequest, RegisterUserRequest};
+use crate::server::domain::entities::user::{NewUser, User, UserPayload};
 use crate::server::domain::repositories::user_repository::UserRepository;
-use crate::server::application::services::auth_service::AuthService;
+use crate::server::application::services::{auth_service::AuthService,jwt_service::JwtService};
 use crate::utils::error::Result;
+use crate::utils::AppError;
 
+#[derive(Clone)]
 pub struct UserUseCases<T: UserRepository> {
-    auth_service: AuthService<T>,
+    auth_service: AuthService,
+    jwt_service: JwtService,
     user_repository: T,
 }
 
 impl<T: UserRepository> UserUseCases<T> {
-    pub fn new(user_repository: T) -> Self {
-        let auth_service = AuthService::new(user_repository.clone());
+    pub fn new(user_repository: T, jwt_secret: String, master_password: String) -> Self {
+        let auth_service = AuthService::new(master_password);
+        let jwt_service = JwtService::new(jwt_secret);
         Self {
+            jwt_service,
             auth_service,
             user_repository,
         }
     }
 
     /// Registrar nuevo usuario
-    pub async fn register_user(&self, phone: String, name: String, password: String) -> Result<User> {
+    pub async fn register_user(&self, request:RegisterUserRequest) -> Result<User> {
+        let RegisterUserRequest { phone, name, password } = request;
+        // Verificar si usuario ya existe
+        if self.user_repository.find_by_phone(&phone).await?.is_some() {
+            return Err(AppError::Conflict(
+                "Ya existe una cuenta con este teléfono".to_string()
+            ));
+        }
+
+        let role = self.auth_service.assign_role(&phone);
+        let hashed_password = self.auth_service.hash_password(&password)?;
+
         let new_user = NewUser {
             phone,
             name,
-            password,
-            role:"".to_string()
+            password: hashed_password,
+            role,
         };
         
-        self.auth_service.register(new_user).await
+        self.user_repository.create(new_user).await
     }
 
-   
-   /// Login de usuario - ahora devuelve User y token por separado
-    pub async fn login_user(&self, phone: String, password: String) -> Result<(User, String)> {
-        self.auth_service.login(&phone, &password).await
+    /// Login de usuario
+    pub async fn login_user(&self, request:LoginUserRequest) -> Result<(User, String)> {
+         let LoginUserRequest { phone, password } = request;
+        let user = self.user_repository
+            .find_by_phone(&phone)
+            .await?
+            .ok_or_else(|| AppError::AuthError("Usuario no encontrado".to_string()))?;
+
+        // Verificar credenciales
+        let is_valid = self.auth_service.verify_credentials(&user, &password)?;
+
+        if !is_valid {
+            return Err(AppError::AuthError("Contraseña incorrecta".to_string()));
+        }
+
+        // Generar token JWT
+        let user_payload = UserPayload::new(
+            user.id,
+            user.name.clone(),
+            user.phone.clone(),
+            user.role.clone(),
+        );
+        
+        let token = self.jwt_service.generate_token_from_payload(&user_payload)?;
+
+        Ok((user, token))
     }
 
     /// Obtener usuario por ID
@@ -44,7 +83,15 @@ impl<T: UserRepository> UserUseCases<T> {
     pub async fn get_user_by_phone(&self, user_phone: &str) -> Result<Option<User>> {
         self.user_repository.find_by_phone(user_phone).await
     }
-     pub async fn is_admin(&self, phone: &str) -> Result<bool> {
-        self.auth_service.is_admin(phone).await
+
+    /// Verificar si un usuario es admin
+    pub async fn is_admin(&self, phone: &str) -> Result<bool> {
+        let user = self.user_repository.find_by_phone(phone).await?;
+        Ok(user.map(|u| u.role == "admin").unwrap_or(false))
+    }
+
+    /// Verificar token JWT
+    pub fn verify_token(&self, token: &str) -> Result<UserPayload> {
+        self.jwt_service.verify_token(token)
     }
 }
