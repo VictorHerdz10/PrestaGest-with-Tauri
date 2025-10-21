@@ -2,7 +2,7 @@ use serde::Deserialize;
 use validator::Validate;
 
 #[derive(Debug, Deserialize, Validate)]
-pub struct RegisterRequest {
+pub struct RegisterRequestDto {
     #[validate(length(min = 1, message = "El nombre no puede estar vacío"))]
     pub name: String,
     
@@ -14,7 +14,7 @@ pub struct RegisterRequest {
 }
 
 #[derive(Debug, Deserialize, Validate)]
-pub struct LoginRequest {
+pub struct LoginRequestDto {
     #[validate(length(min = 1, message = "El campo de teléfono no puede estar vacío"))]
     pub phone: String,
     

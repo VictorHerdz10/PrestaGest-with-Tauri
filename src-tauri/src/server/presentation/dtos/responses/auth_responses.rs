@@ -27,7 +27,7 @@ impl From<User> for UserResponse {
 
 // Implementación para crear AuthResponse desde User y token
 impl AuthResponse {
-    pub fn from_user_and_token( token: String) -> Self {
+    pub fn from_token( token: String) -> Self {
         Self {
             access_token: token,
         }
