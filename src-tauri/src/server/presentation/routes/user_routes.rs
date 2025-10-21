@@ -19,5 +19,5 @@ where
         .route("/:id", get(get_user_by_id))
         .route("/phone/:phone", get(get_user_by_phone))
         .layer(middleware::from_fn(normal_rate_limit))
-        .with_state(user_use_cases) // Add state here
+        .with_state(user_use_cases)
 }
