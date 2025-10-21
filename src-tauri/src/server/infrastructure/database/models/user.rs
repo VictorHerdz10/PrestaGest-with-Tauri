@@ -1,9 +1,10 @@
-use diesel::prelude::*;
+use crate::server::domain::entities::user::{NewUser, User};
+use crate::server::infrastructure::database::schema::users;
 use chrono::NaiveDateTime;
+use diesel::prelude::*;
 
-// Modelo de Diesel para la tabla users
-#[derive(Queryable, Identifiable,Selectable, Debug, Clone)]
-#[diesel(table_name = crate::server::infrastructure::database::schema::users)]
+#[derive(Queryable, Identifiable, Selectable, Debug, Clone)]
+#[diesel(table_name = users)]
 #[diesel(check_for_backend(diesel::sqlite::Sqlite))]
 pub struct UserModel {
     pub id: i32,
@@ -15,9 +16,8 @@ pub struct UserModel {
     pub updated_at: NaiveDateTime,
 }
 
-// Modelo para insertar nuevos usuarios
 #[derive(Insertable, Debug)]
-#[diesel(table_name = crate::server::infrastructure::database::schema::users)]
+#[diesel(table_name = users)]
 pub struct NewUserModel {
     pub phone: String,
     pub name: String,
@@ -25,25 +25,22 @@ pub struct NewUserModel {
     pub role: String,
 }
 
-// Implementación de conversiones
-impl From<UserModel> for crate::server::domain::entities::user::User {
+impl From<UserModel> for User {
     fn from(model: UserModel) -> Self {
-        use chrono::TimeZone;
-        
         Self {
             id: model.id,
             phone: model.phone,
             name: model.name,
             password: model.password,
-            role: model.role,
-            created_at: chrono::Utc.from_utc_datetime(&model.created_at),
-            updated_at: chrono::Utc.from_utc_datetime(&model.updated_at),
+            role: model.role
+           // created_at: model.created_at.to_string(),
+           // updated_at: model.updated_at.to_string(),
         }
     }
 }
 
-impl From<crate::server::domain::entities::user::NewUser> for NewUserModel {
-    fn from(entity: crate::server::domain::entities::user::NewUser) -> Self {
+impl From<NewUser> for NewUserModel {
+    fn from(entity: NewUser) -> Self {
         Self {
             phone: entity.phone,
             name: entity.name,
