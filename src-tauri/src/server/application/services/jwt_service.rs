@@ -1,19 +1,17 @@
 use jsonwebtoken::{encode, decode, Header, Validation, EncodingKey, DecodingKey};
 use serde::{Deserialize, Serialize};
 use chrono::{Utc, Duration};
-use crate::utils::error::{Result, AppError};
-use crate::server::presentation::middleware::jwt_middleware::UserPayload;
+use crate::{server::domain::entities::user::UserPayload, utils::error::{AppError, Result}};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Claims {
-    pub sub: i32,        // user id
+    pub sub: i32,
     pub name: String,
     pub phone: String,
     pub role: String,
-    pub exp: i64,        // expiry timestamp
+    pub exp: i64,
 }
 
-// Implementar From/Into para convertir entre Claims y UserPayload
 impl From<Claims> for UserPayload {
     fn from(claims: Claims) -> Self {
         Self {
@@ -42,6 +40,7 @@ impl From<&UserPayload> for Claims {
     }
 }
 
+#[derive(Clone)]
 pub struct JwtService {
     secret: String,
 }
@@ -57,6 +56,7 @@ impl JwtService {
         encode(&Header::default(), &claims, &EncodingKey::from_secret(self.secret.as_ref()))
             .map_err(|e| AppError::ServerError(format!("Error generando token: {}", e)))
     }
+    
     pub fn verify_token(&self, token: &str) -> Result<UserPayload> {
         let token_data = decode::<Claims>(
             token,
