@@ -16,4 +16,5 @@ where
         .route("/login", post(login))
         .route("/authenticate", get(get_authenticated_user))
         .layer(middleware::from_fn(auth_rate_limit))
-        .with_state(user_use_cases) 
+        .with_state(user_use_cases)
+}
