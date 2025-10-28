@@ -1,5 +1,5 @@
 use super::super::dtos::{
-    requests::auth_requests::{LoginRequestDto, RegisterRequestDto},
+    requests::auth_requests_dto::{LoginRequestDto, RegisterRequestDto},
     responses::auth_responses::{AuthResponse, UserResponse},
 };
 use crate::server::application::use_cases::user_use_cases::UserUseCases;
