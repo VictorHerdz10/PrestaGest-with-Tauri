@@ -29,7 +29,7 @@ export function useCreateLoans() {
   return useMutation({
     mutationFn: (data: LoanForm) => loanService.create(data),
     onSuccess: (data) => {
-      if (data.statusCode === 201) {
+      if (data.status_code === 201) {
         toast.success(data.message);
         // Invalidar ambas queries
         queryClient.invalidateQueries({ queryKey: ["loans"] });
