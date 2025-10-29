@@ -22,7 +22,7 @@ pub struct NewBorrower {
     pub location: String,
 }
 
-impl Borrower {
+/*impl Borrower {
     pub fn new(
         id: i32,
         phone: String,
@@ -48,7 +48,7 @@ impl Borrower {
             updated_at,
         }
     }
-}
+}*/
 
 impl NewBorrower {
     pub fn new(phone: String, name: String, location: String) -> Self {
