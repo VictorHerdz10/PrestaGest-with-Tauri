@@ -40,18 +40,18 @@ export type AuthResponse = {
   access_token: string;
 };
 export type RegisterResponse = {
-  statusCode: number;
+  status_code: number;
   message: string;
   error: string;
 };
 
 export type ErrorResponse = {
-  statusCode: number;
+  status_code: number;
   message: string | string[];
   error: string;
 };
 export type ApiErrorResponse = {
-  statusCode: number;
+  status_code: number;
   message: string;
   error: string;
 };
