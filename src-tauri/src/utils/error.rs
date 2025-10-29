@@ -106,7 +106,7 @@ impl IntoResponse for AppError {
         match self {
             AppError::ValidationError(messages) => {
                 let body = Json(json!({
-                    "statusCode": StatusCode::BAD_REQUEST.as_u16(),
+                    "status_code": StatusCode::BAD_REQUEST.as_u16(),
                     "message": messages,
                     "error": "validation_error",
                 }));
