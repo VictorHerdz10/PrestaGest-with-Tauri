@@ -30,14 +30,14 @@ export const authService = {
           error.response?.data ?? {
             message: "Error de autenticación",
             error: "AUTH_ERROR",
-            statusCode: 401,
+            status_code: 401,
           }
         );
       }
       return {
         message: "Error desconocido",
         error: "UNKNOWN_ERROR",
-        statusCode: 500,
+        status_code: 500,
       };
     }
   },
@@ -57,14 +57,14 @@ export const authService = {
           error.response?.data ?? {
             message: "Error de registro",
             error: "REGISTER_ERROR",
-            statusCode: 400,
+            status_code: 400,
           }
         );
       }
       return {
         message: "Error desconocido",
         error: "UNKNOWN_ERROR",
-        statusCode: 500,
+        status_code: 500,
       };
     }
   },
@@ -81,7 +81,7 @@ export const authService = {
           error.response?.data ?? {
             message: "Error de autenticación",
             error: "AUTH_ERROR",
-            statusCode: 401,
+            status_code: 401,
           }
         );
       }
@@ -89,7 +89,7 @@ export const authService = {
       return {
         message: "Error desconocido al verificar autenticación",
         error: "UNKNOWN_ERROR",
-        statusCode: 500,
+        status_code: 500,
       };
     }
   },
