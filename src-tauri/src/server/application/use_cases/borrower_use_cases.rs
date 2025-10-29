@@ -80,8 +80,5 @@ impl<T: BorrowerRepository> BorrowerUseCases<T> {
         self.borrower_repository.delete(id).await
     }
 
-    /// Obtener borrower por teléfono
-    pub async fn get_borrower_by_phone(&self, phone: &str) -> Result<Option<Borrower>> {
-        self.borrower_repository.find_by_phone(phone).await
-    }
+  
 }
