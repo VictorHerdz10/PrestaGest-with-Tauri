@@ -32,7 +32,8 @@ export function useCreateBorrower() {
   return useMutation({
     mutationFn: (data: BorrowerForm) => borrowerService.create(data),
     onSuccess: (data) => {
-      if (data.statusCode === 201) {
+      console.log(data)
+      if (data.status_code === 201) {
         toast.success(data.message);
         queryClient.invalidateQueries({ queryKey: ["borrowers"] });
       } else {
