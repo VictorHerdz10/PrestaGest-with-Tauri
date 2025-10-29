@@ -2,7 +2,7 @@ use super::super::dtos::{
     requests::auth_requests_dto::{LoginRequestDto, RegisterRequestDto},
     responses::auth_responses::{AuthResponse, UserResponse},
 };
-use crate::server::application::use_cases::user_use_cases::UserUseCases;
+use crate::server::{application::use_cases::user_use_cases::UserUseCases, presentation::dtos::responses::api_response::ApiResponse};
 use crate::server::domain::repositories::user_repository::UserRepository;
 use crate::server::{
     application::requests::auth_model_requests::{LoginUserRequest, RegisterUserRequest},
@@ -31,12 +31,9 @@ where
 
     user_use_cases.register_user(register_request).await?;
 
-    let response = json!({
-        "statusCode": 201,
-        "message": "Usuario registrado exitosamente"
-    });
+    let response = ApiResponse::created("Usuario registrado exitosamente".to_string());
 
-    Ok((StatusCode::CREATED, Json(response)))
+    Ok((StatusCode::CREATED, Json(json!(response))))
 }
 
 pub async fn login<T>(
