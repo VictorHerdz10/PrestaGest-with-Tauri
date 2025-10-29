@@ -49,7 +49,7 @@ export function BorrowerCard({ borrower, onClick }: BorrowerCardProps) {
         </div>
         
         <div className="text-xs text-gray-400 bg-gray-50 px-2 py-1 rounded-full">
-          Actualizado: {new Date(borrower.updatedAt).toLocaleDateString()}
+          Actualizado: {new Date(borrower.updated_at).toLocaleDateString()}
         </div>
       </div>
     </div>
