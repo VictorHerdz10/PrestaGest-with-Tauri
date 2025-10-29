@@ -52,7 +52,7 @@ impl<T: UserRepository> UserUseCases<T> {
         let user = self.user_repository
             .find_by_phone(&phone)
             .await?
-            .ok_or_else(|| AppError::AuthError("Usuario no encontrado".to_string()))?;
+            .ok_or_else(|| AppError::NotFound("Usuario no encontrado".to_string()))?;
 
         // Verificar credenciales
         let is_valid = self.auth_service.verify_credentials(&user, &password)?;
