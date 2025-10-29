@@ -19,14 +19,14 @@ export const loanService = {
           error.response?.data ?? {
             message: "Error al obtener los préstamos",
             error: "LOAN_FETCH_ERROR",
-            statusCode: 500,
+            status_code: 500,
           }
         );
       }
       return {
         message: "Error desconocido al obtener préstamos",
         error: "UNKNOWN_ERROR",
-        statusCode: 500,
+        status_code: 500,
       };
     }
   },
@@ -43,14 +43,14 @@ export const loanService = {
           error.response?.data ?? {
             message: "Error al crear el préstamo",
             error: "LOAN_CREATE_ERROR",
-            statusCode: 500,
+            status_code: 500,
           }
         );
       }
       return {
         message: "Error desconocido al crear préstamo",
         error: "UNKNOWN_ERROR",
-        statusCode: 500,
+        status_code: 500,
       };
     }
   },
@@ -68,14 +68,14 @@ export const loanService = {
           error.response?.data ?? {
             message: "Error al actualizar el préstamo",
             error: "LOAN_UPDATE_ERROR",
-            statusCode: 500,
+            status_code: 500,
           }
         );
       }
       return {
         message: "Error desconocido al actualizar préstamo",
         error: "UNKNOWN_ERROR",
-        statusCode: 500,
+        status_code: 500,
       };
     }
   },
@@ -90,14 +90,14 @@ export const loanService = {
           error.response?.data ?? {
             message: "Error al eliminar el préstamo",
             error: "LOAN_DELETE_ERROR",
-            statusCode: 500,
+            status_code: 500,
           }
         );
       }
       return {
         message: "Error desconocido al eliminar préstamo",
         error: "UNKNOWN_ERROR",
-        statusCode: 500,
+        status_code: 500,
       };
     }
   },
