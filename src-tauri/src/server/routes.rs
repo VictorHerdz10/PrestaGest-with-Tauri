@@ -16,6 +16,7 @@ use crate::{server::presentation::{
 
 pub fn configure_routes() -> Router {
      let user_use_cases = ServiceFactory::create_user_use_cases();
+     let borrower_use_cases = ServiceFactory::create_borrower_use_cases();
     Router::new()
     
     .route("/health", get(health_check)
@@ -25,7 +26,7 @@ pub fn configure_routes() -> Router {
     .route("/api/hello", get(hello_world)
         .layer(middleware::from_fn(normal_rate_limit)))  
     
-    .nest("/api", api_routes(user_use_cases))
+    .nest("/api", api_routes(user_use_cases, borrower_use_cases))
     .layer(middleware::from_fn(timing_middleware))
 }
 
