@@ -67,18 +67,6 @@ impl BorrowerRepository for DieselBorrowerRepository {
         Ok(borrower_model.map(|model| model.into()))
     }
 
-    /// Buscar un borrower por su teléfono
-    async fn find_by_phone(&self, phone: &str) -> Result<Option<Borrower>> {
-        let mut conn = self.pool.get()?;
-        
-        let borrower_model = borrowers::table
-            .filter(borrowers::phone.eq(phone))
-            .first::<BorrowerModel>(&mut conn)
-            .optional()?;
-            
-        Ok(borrower_model.map(|model| model.into()))
-    }
-
     /// Actualizar un borrower existente
     async fn update(&self, id: i32, borrower: &Borrower) -> Result<Borrower> {
         let mut conn = self.pool.get()?;
