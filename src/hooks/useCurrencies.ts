@@ -29,7 +29,7 @@ export function useCreateCurrency() {
   return useMutation({
     mutationFn: (data: CurrencyForm) => currencyService.create(data),
     onSuccess: (data) => {
-      if (data.statusCode === 201) {
+      if (data.status_code === 201) {
         toast.success(data.message);
         queryClient.invalidateQueries({ queryKey: ["currencies"] });
       } else {
