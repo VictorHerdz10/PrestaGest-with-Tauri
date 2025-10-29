@@ -43,8 +43,10 @@ where
 
     let borrower = borrower_use_cases.create_borrower(create_request).await?;
 
-    let response = ApiResponse::created(format!("{} registrado exitosamente", borrower.name));
-
+    let response = ApiResponse::created(format!(
+        "Prestatario {} registrado exitosamente",
+        borrower.name
+    ));
     Ok((StatusCode::CREATED, Json(json!(response))))
 }
 
