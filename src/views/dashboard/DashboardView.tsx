@@ -102,14 +102,14 @@ export default function DashboardView() {
 
   // Determinar estado correcto
   const getBorrowerStatus = (borrower: typeof currentBorrower) => {
-    if (borrower.totalLoans === 0 && borrower.totalPaid === 0) {
+    if (borrower.total_loans === 0 && borrower.total_paid === 0) {
       return "Registrado";
     }
     return borrower.status === "active" ? "Activo" : "Pagado";
   };
 
   const getStatusClass = (borrower: typeof currentBorrower) => {
-    if (borrower.totalLoans === 0 && borrower.totalPaid === 0) {
+    if (borrower.total_loans === 0 && borrower.total_paid === 0) {
       return "bg-gradient-to-r from-indigo-500 to-purple-500 text-white";
     }
     return borrower.status === "active"
@@ -179,13 +179,13 @@ export default function DashboardView() {
                 <div className="bg-white p-4 rounded-lg shadow-sm">
                   <p className="text-sm text-gray-500">Préstamos totales</p>
                   <p className="text-xl font-bold text-indigo-700">
-                    {formatCurrency(currentBorrower.totalLoans)}
+                    {formatCurrency(currentBorrower.total_loans)}
                   </p>
                 </div>
                 <div className="bg-white p-4 rounded-lg shadow-sm">
                   <p className="text-sm text-gray-500">Total pagado</p>
                   <p className="text-xl font-bold text-green-600">
-                    {formatCurrency(currentBorrower.totalPaid)}
+                    {formatCurrency(currentBorrower.total_paid)}
                   </p>
                 </div>
               </div>
@@ -296,7 +296,7 @@ export default function DashboardView() {
                 <p className="text-xl font-bold">
                   {
                     borrowers.filter(
-                      (b) => b.totalLoans > 0 && b.totalPaid < b.totalLoans
+                      (b) => b.total_loans > 0 && b.total_paid < b.total_loans
                     ).length
                   }
                 </p>
@@ -317,7 +317,7 @@ export default function DashboardView() {
                 <p className="text-xl font-bold">
                   {
                     borrowers.filter(
-                      (b) => b.totalLoans > 0 && b.totalPaid >= b.totalLoans
+                      (b) => b.total_loans > 0 && b.total_paid >= b.total_loans
                     ).length
                   }
                 </p>
