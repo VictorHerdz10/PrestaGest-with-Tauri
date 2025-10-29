@@ -7,11 +7,11 @@ use crate::server::presentation::routes::{
 use crate::server::presentation::middleware::jwt_middleware::jwt_middleware;
 use crate::server::application::use_cases::{
     user_use_cases::UserUseCases,
-    borrower_use_cases::BorrowerUseCases  // ← Añadir
+    borrower_use_cases::BorrowerUseCases
 };
 use crate::server::domain::repositories::{
     user_repository::UserRepository,
-    borrower_repository::BorrowerRepository  // ← Añadir
+    borrower_repository::BorrowerRepository
 };
 
 pub fn api_routes<T, U>(user_use_cases: UserUseCases<T>, borrower_use_cases: BorrowerUseCases<U>) -> Router 
