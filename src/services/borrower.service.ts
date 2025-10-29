@@ -12,6 +12,7 @@ export const borrowerService = {
   async getAll(): Promise<BorrowerResponse[] | BorrowerErrorResponse> {
     try {
       const response = await api.get<BorrowerResponse[]>("/borrowers");
+      console.log(response)
       return response.data;
     } catch (error) {
       if (isApiError<BorrowerErrorResponse>(error)) {
@@ -19,14 +20,14 @@ export const borrowerService = {
           error.response?.data ?? {
             message: "Error al obtener los prestatarios",
             error: "BORROWER_FETCH_ERROR",
-            statusCode: 500,
+            status_code: 500,
           }
         );
       }
       return {
         message: "Error desconocido al obtener prestatarios",
         error: "UNKNOWN_ERROR",
-        statusCode: 500,
+        status_code: 500,
       };
     }
   },
@@ -46,14 +47,14 @@ export const borrowerService = {
           error.response?.data ?? {
             message: "Error al crear el prestatario",
             error: "BORROWER_CREATE_ERROR",
-            statusCode: 500,
+            status_code: 500,
           }
         );
       }
       return {
         message: "Error desconocido al crear prestatario",
         error: "UNKNOWN_ERROR",
-        statusCode: 500,
+        status_code: 500,
       };
     }
   },
@@ -74,14 +75,14 @@ export const borrowerService = {
           error.response?.data ?? {
             message: "Error al actualizar el prestatario",
             error: "BORROWER_UPDATE_ERROR",
-            statusCode: 500,
+            status_code: 500,
           }
         );
       }
       return {
         message: "Error desconocido al actualizar prestatario",
         error: "UNKNOWN_ERROR",
-        statusCode: 500,
+        status_code: 500,
       };
     }
   },
@@ -98,14 +99,14 @@ export const borrowerService = {
           error.response?.data ?? {
             message: "Error al eliminar el prestatario",
             error: "BORROWER_DELETE_ERROR",
-            statusCode: 500,
+            status_code: 500,
           }
         );
       }
       return {
         message: "Error desconocido al eliminar prestatario",
         error: "UNKNOWN_ERROR",
-        statusCode: 500,
+        status_code: 500,
       };
     }
   },
