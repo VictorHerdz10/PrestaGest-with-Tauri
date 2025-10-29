@@ -20,22 +20,22 @@ export type BorrowerResponse = {
   name: string;
   phone: string;
   location: string;
-  totalLoans: number;
-  totalPaid: number;
+  total_loans: number;
+  total_paid: number;
   balance: number;
   status: string;
-  createdAt: Date;
-  updatedAt: Date;
+  created_at: Date;
+  updated_at: Date;
 };
 
 export type BorrowerErrorResponse = {
-  statusCode: number;
+  status_code: number;
   message: string | string[];
   error: string;
 };
 
 export type BorrowerSuccessResponse = {
-  statusCode: number;
+  status_code: number;
   message: string;
   error: string;
 };
