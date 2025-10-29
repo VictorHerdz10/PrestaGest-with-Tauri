@@ -23,12 +23,12 @@ export type CurrencyResponse = {
 };
 
 export type CurrencyErrorResponse = {
-  statusCode: number;
+  status_code: number;
   message: string | string[];
   error: string;
 };
 export type CurrencySucessResponse = {
-  statusCode: number;
+  status_code: number;
   message: string;
   error: string;
 };
