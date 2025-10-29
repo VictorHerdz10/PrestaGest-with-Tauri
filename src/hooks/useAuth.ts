@@ -60,7 +60,7 @@ export function useAuth() {
   const registerMutation = useMutation({
     mutationFn: (data: RegisterForm) => authService.register(data),
     onSuccess: (data) => {
-      if (data.statusCode === 201) {
+      if (data.status_code === 201) {
         toast.success(data.message);
         setTimeout(() => {
           navigate("/auth/login");
