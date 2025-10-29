@@ -19,14 +19,14 @@ export const currencyService = {
           error.response?.data ?? {
             message: "Error al obtener las monedas",
             error: "CURRENCY_FETCH_ERROR",
-            statusCode: 500,
+            status_code: 500,
           }
         );
       }
       return {
         message: "Error desconocido al obtener monedas",
         error: "UNKNOWN_ERROR",
-        statusCode: 500,
+        status_code: 500,
       };
     }
   },
@@ -46,14 +46,14 @@ export const currencyService = {
           error.response?.data ?? {
             message: "Error al crear la moneda",
             error: "CURRENCY_CREATE_ERROR",
-            statusCode: 500,
+            status_code: 500,
           }
         );
       }
       return {
         message: "Error desconocido al crear moneda",
         error: "UNKNOWN_ERROR",
-        statusCode: 500,
+        status_code: 500,
       };
     }
   },
@@ -74,14 +74,14 @@ export const currencyService = {
           error.response?.data ?? {
             message: "Error al actualizar la moneda",
             error: "CURRENCY_UPDATE_ERROR",
-            statusCode: 500,
+            status_code: 500,
           }
         );
       }
       return {
         message: "Error desconocido al actualizar moneda",
         error: "UNKNOWN_ERROR",
-        statusCode: 500,
+        status_code: 500,
       };
     }
   },
@@ -98,14 +98,14 @@ export const currencyService = {
           error.response?.data ?? {
             message: "Error al eliminar la moneda",
             error: "CURRENCY_DELETE_ERROR",
-            statusCode: 500,
+            status_code: 500,
           }
         );
       }
       return {
         message: "Error desconocido al eliminar moneda",
         error: "UNKNOWN_ERROR",
-        statusCode: 500,
+        status_code: 500,
       };
     }
   },
