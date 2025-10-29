@@ -52,13 +52,13 @@ export interface PaymentResponse {
 }
 
 export type PaymentErrorResponse = {
-  statusCode: number;
+  status_code: number;
   message: string | string[];
   error: string;
 };
 
 export type PaymentSuccessResponse = {
-  statusCode: number;
+  status_code: number;
   message: string;
   error: string;
 };
