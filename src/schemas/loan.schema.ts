@@ -41,13 +41,13 @@ export interface LoanResponse {
 }
 
 export type LoanErrorResponse = {
-  statusCode: number;
+  status_code: number;
   message: string | string[];
   error: string;
 };
 
 export type LoanSuccessResponse = {
-  statusCode: number;
+  status_code: number;
   message: string;
   error: string;
 };
