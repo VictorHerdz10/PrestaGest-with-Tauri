@@ -19,14 +19,14 @@ export const paymentService = {
           error.response?.data ?? {
             message: "Error al obtener los pagos",
             error: "PAYMENT_FETCH_ERROR",
-            statusCode: 500,
+            status_code: 500,
           }
         );
       }
       return {
         message: "Error desconocido al obtener pagos",
         error: "UNKNOWN_ERROR",
-        statusCode: 500,
+        status_code: 500,
       };
     }
   },
@@ -43,14 +43,14 @@ export const paymentService = {
           error.response?.data ?? {
             message: "Error al crear el pago",
             error: "PAYMENT_CREATE_ERROR",
-            statusCode: 500,
+            status_code: 500,
           }
         );
       }
       return {
         message: "Error desconocido al crear pago",
         error: "UNKNOWN_ERROR",
-        statusCode: 500,
+        status_code: 500,
       };
     }
   },
@@ -66,14 +66,14 @@ export const paymentService = {
           error.response?.data ?? {
             message: "Error al eliminar el pago",
             error: "PAYMENT_DELETE_ERROR",
-            statusCode: 500,
+            status_code: 500,
           }
         );
       }
       return {
         message: "Error desconocido al eliminar pago",
         error: "UNKNOWN_ERROR",
-        statusCode: 500,
+        status_code: 500,
       };
     }
   },
@@ -90,14 +90,14 @@ export const paymentService = {
           error.response?.data ?? {
             message: "Error al actualizar el pago",
             error: "PAYMENT_UPDATE_ERROR",
-            statusCode: 500,
+            status_code: 500,
           }
         );
       }
       return {
         message: "Error desconocido al actualizar pago",
         error: "UNKNOWN_ERROR",
-        statusCode: 500,
+        status_code: 500,
       };
     }
   },
