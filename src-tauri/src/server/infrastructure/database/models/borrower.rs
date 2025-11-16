@@ -45,8 +45,8 @@ impl From<BorrowerModel> for Borrower {
             total_paid: model.total_paid,
             balance: model.balance,
             status: model.status,
-            created_at: model.created_at.and_utc(),
-            updated_at: model.updated_at.and_utc(),
+            created_at: model.created_at.and_utc().to_rfc3339(),
+            updated_at: model.updated_at.and_utc().to_rfc3339(),
         }
     }
 }
