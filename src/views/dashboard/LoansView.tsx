@@ -372,14 +372,14 @@ const getStatusBadge = (status: string) => {
                           {loan.borrower.name}
                         </div>
                         <div className="text-sm text-gray-500 sm:hidden">
-                          {formatDate(loan.createdAt)}
+                          {formatDate(loan.created_at)}
                         </div>
                       </td>
                       <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {formatCurrency(loan.amount)}
                       </td>
                       <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500 hidden sm:table-cell">
-                        {formatDate(loan.createdAt)}
+                        {formatDate(loan.created_at)}
                       </td>
                       <td className="px-4 py-4 whitespace-nowrap">
                         {getStatusBadge(loan.status)}
@@ -574,7 +574,7 @@ const getStatusBadge = (status: string) => {
                           {formatCurrency(loan.amount)}
                         </td>
                         <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {formatDate(loan.createdAt)}
+                          {formatDate(loan.created_at)}
                         </td>
                         <td className="px-4 py-4 whitespace-nowrap">
                           {getStatusBadge(loan.status)}
