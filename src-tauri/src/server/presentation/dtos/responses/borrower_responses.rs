@@ -1,6 +1,6 @@
 use chrono::{DateTime, Utc};
 use serde::Serialize;
-use crate::server::domain::entities::borrower::Borrower;
+use crate::server::application::requests::borrower_model_requests::BorrowerModelResponse;
 
 #[derive(Debug, Serialize)]
 pub struct BorrowerResponseDto {
@@ -16,19 +16,19 @@ pub struct BorrowerResponseDto {
     pub updated_at: DateTime<Utc>,
 }
 
-impl From<Borrower> for BorrowerResponseDto {
-    fn from(borrower: Borrower) -> Self {
+impl From<BorrowerModelResponse> for BorrowerResponseDto {
+    fn from(dto: BorrowerModelResponse) -> Self {
         Self {
-            id: borrower.id,
-            phone: borrower.phone,
-            name: borrower.name,
-            location: borrower.location,
-            total_loans: borrower.total_loans,
-            total_paid: borrower.total_paid,
-            balance: borrower.balance,
-            status: borrower.status,
-            created_at: borrower.created_at,
-            updated_at: borrower.updated_at,
+            id: dto.id,
+            phone: dto.phone,
+            name: dto.name,
+            location: dto.location,
+            total_loans: dto.total_loans,
+            total_paid: dto.total_paid,
+            balance: dto.balance,
+            status: dto.status,
+            created_at: dto.created_at,
+            updated_at: dto.updated_at,
         }
     }
 }
