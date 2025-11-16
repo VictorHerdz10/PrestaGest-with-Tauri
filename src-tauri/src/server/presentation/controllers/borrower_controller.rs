@@ -31,21 +31,19 @@ pub async fn create_borrower<T>(
 where
     T: BorrowerRepository,
 {
-    // Validar el payload del cliente
     payload.validate().map_err(AppError::from)?;
 
-    // Mapear DTO a Model Request para uso interno
     let create_request = CreateBorrowerRequest {
         phone: payload.phone,
         name: payload.name,
         location: payload.location,
     };
 
-    let borrower = borrower_use_cases.create_borrower(create_request).await?;
+    let borrower_dto = borrower_use_cases.create_borrower(create_request).await?;
 
     let response = ApiResponse::created(format!(
         "Prestatario {} registrado exitosamente",
-        borrower.name
+        borrower_dto.name
     ));
     Ok((StatusCode::CREATED, Json(json!(response))))
 }
@@ -57,9 +55,9 @@ pub async fn get_all_borrowers<T>(
 where
     T: BorrowerRepository,
 {
-    let borrowers = borrower_use_cases.get_all_borrowers().await?;
+    let borrower_dtos = borrower_use_cases.get_all_borrowers().await?;
 
-    let response_dtos: Vec<BorrowerResponseDto> = borrowers
+    let response_dtos: Vec<BorrowerResponseDto> = borrower_dtos
         .into_iter()
         .map(BorrowerResponseDto::from)
         .collect();
@@ -75,9 +73,8 @@ pub async fn get_borrower_by_id<T>(
 where
     T: BorrowerRepository,
 {
-    let borrower = borrower_use_cases.get_borrower_by_id(id).await?;
-
-    Ok(Json(BorrowerResponseDto::from(borrower)))
+    let borrower_dto = borrower_use_cases.get_borrower_by_id(id).await?;
+    Ok(Json(BorrowerResponseDto::from(borrower_dto)))
 }
 
 /// Actualizar un prestatario
@@ -89,23 +86,21 @@ pub async fn update_borrower<T>(
 where
     T: BorrowerRepository,
 {
-    // Validar el payload del cliente si tiene campos
     if payload.phone.is_some() || payload.name.is_some() || payload.location.is_some() {
         payload.validate().map_err(AppError::from)?;
     }
 
-    // Mapear DTO a Model Request para uso interno
     let update_request = UpdateBorrowerRequest {
         phone: payload.phone,
         name: payload.name,
         location: payload.location,
     };
 
-    let updated_borrower = borrower_use_cases
+    let updated_borrower_dto = borrower_use_cases
         .update_borrower(id, update_request)
         .await?;
 
-    Ok(Json(BorrowerResponseDto::from(updated_borrower)))
+    Ok(Json(BorrowerResponseDto::from(updated_borrower_dto)))
 }
 
 /// Eliminar un prestatario
@@ -119,6 +114,5 @@ where
     borrower_use_cases.delete_borrower(id).await?;
 
     let response = ApiResponse::ok("Prestatario eliminado exitosamente".to_string());
-
     Ok((StatusCode::OK, Json(json!(response))))
 }
