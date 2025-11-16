@@ -23,7 +23,7 @@ export function CurrencyCard({ currency, onClick }: CurrencyCardProps) {
       <div className="text-white text-center">
         <div className="text-4xl font-bold mb-2">{currency.code}</div>
         <div className="text-lg">{currency.name}</div>
-        <div className="text-sm mt-2">1 {currency.code} = {currency.exchangeRate} CUP</div>
+        <div className="text-sm mt-2">1 {currency.code} = {currency.exchange_rate} CUP</div>
       </div>
     </div>
   );
