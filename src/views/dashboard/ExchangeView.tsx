@@ -23,11 +23,11 @@ export default function ExchangeView() {
     // Si alguna es CUP
     if (from === 'CUP' && to !== 'CUP') {
       const toCurrencyData = currencies?.find(c => c.code === to);
-      if (toCurrencyData) setExchangeRate(1 / toCurrencyData.exchangeRate);
+      if (toCurrencyData) setExchangeRate(1 / toCurrencyData.exchange_rate);
     } 
     else if (from !== 'CUP' && to === 'CUP') {
       const fromCurrencyData = currencies?.find(c => c.code === from);
-      if (fromCurrencyData) setExchangeRate(fromCurrencyData.exchangeRate);
+      if (fromCurrencyData) setExchangeRate(fromCurrencyData.exchange_rate);
     }
     // Entre dos monedas extranjeras
     else {
@@ -36,7 +36,7 @@ export default function ExchangeView() {
       
       if (fromCurrencyData && toCurrencyData) {
         // Tasa relativa: (1 FROM = X CUP) / (1 TO = Y CUP) => X/Y
-        setExchangeRate(fromCurrencyData.exchangeRate / toCurrencyData.exchangeRate);
+        setExchangeRate(fromCurrencyData.exchange_rate / toCurrencyData.exchange_rate);
       } else {
         setExchangeRate(1);
       }
