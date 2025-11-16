@@ -29,15 +29,15 @@ export interface LoanResponse {
     name: string;
     phone: string;
     location: string;
-    totalLoans: number;
-    totalPaid: number;
+    total_loans: number;
+    total_paid: number;
     balance: number;
     status: string;
-    createdAt: Date;
-    updatedAt: Date;
+    created_at: Date;
+    updated_at: Date;
   };
-  createdAt: string;
-  updatedAt: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export type LoanErrorResponse = {
