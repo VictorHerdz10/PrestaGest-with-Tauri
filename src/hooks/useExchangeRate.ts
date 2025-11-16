@@ -22,7 +22,7 @@ export function useExchangeRate() {
     },
     select: (data) => ({
       currencies: data,
-      defaultRate: data.find((c) => c.code === "USD")?.exchangeRate || 1, 
+      defaultRate: data.find((c) => c.code === "USD")?.exchange_rate || 1, 
     }),
     staleTime: 5 * 60 * 1000,
   });
