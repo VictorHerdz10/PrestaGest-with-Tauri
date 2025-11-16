@@ -62,13 +62,13 @@ export function CurrencyForm({
       >
         <label className="block text-sm font-medium text-gray-700 mb-2">Tasa de cambio (CUP)</label>
         <input
-          {...register('exchangeRate', { valueAsNumber: true })}
+          {...register('exchange_rate', { valueAsNumber: true })}
           type="number"
           step="0.01"
           className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all placeholder-gray-400"
           placeholder="Ej: 370.0"
         />
-        {errors.exchangeRate && <p className="mt-2 text-sm text-red-600">{errors.exchangeRate.message}</p>}
+        {errors.exchange_rate && <p className="mt-2 text-sm text-red-600">{errors.exchange_rate.message}</p>}
       </motion.div>
 
       <motion.div
