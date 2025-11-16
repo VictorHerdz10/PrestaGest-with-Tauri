@@ -65,7 +65,7 @@ interface MovementItem {
     name: string;
   };
   amount: number;
-  amountCUP?: number;
+  amount_cup?: number;
   currency?: string;
   status?: "active" | "paid";
 }
@@ -100,7 +100,7 @@ export default function ReportsView() {
   // Función para convertir LoanResponse a MovementItem
   const loanToMovementItem = (loan: LoanResponse): MovementItem => ({
     id: loan.id,
-    createdAt: loan.createdAt,
+    createdAt: loan.created_at,
     type: "loan",
     borrower: loan.borrower,
     amount: loan.amount,
@@ -117,7 +117,7 @@ const getFilteredMetrics = () => {
   );
   
   const filteredTotalPayments = filteredPayments.reduce(
-    (sum: number, payment: PaymentResponse) => sum + (payment.amountCUP || 0), 
+    (sum: number, payment: PaymentResponse) => sum + (payment.amount_cup || 0), 
     0
   );
   
@@ -150,11 +150,11 @@ const getFilteredMetrics = () => {
   // Función para convertir PaymentResponse a MovementItem
   const paymentToMovementItem = (payment: PaymentResponse): MovementItem => ({
     id: payment.id,
-    createdAt: payment.createdAt,
+    createdAt: payment.created_at,
     type: "payment",
     borrower: payment.borrower,
     amount: payment.amount,
-    amountCUP: payment.amountCUP,
+    amount_cup: payment.amount_cup,
     currency: payment.currency,
   });
 
@@ -179,9 +179,9 @@ const getFilteredMetrics = () => {
     const result = Array(12).fill(0);
 
     data.forEach((item) => {
-      const date = new Date(item.createdAt);
+      const date = new Date(item.created_at);
       const month = date.getMonth();
-      const amount = "amountCUP" in item ? item.amountCUP : item.amount;
+      const amount = "amount_cup" in item ? item.amount_cup : item.amount;
       result[month] += amount;
     });
 
@@ -266,7 +266,7 @@ const getFilteredMetrics = () => {
     0
   );
   const totalPayments = payments.reduce(
-    (sum: number, payment: PaymentResponse) => sum + payment.amountCUP,
+    (sum: number, payment: PaymentResponse) => sum + payment.amount_cup,
     0
   );
   const activeBorrowers = borrowers.filter((borrower: BorrowerResponse) => {
@@ -283,7 +283,7 @@ const getFilteredMetrics = () => {
 
   // Paginación
   const allItems = [...filteredLoans, ...filteredPayments].sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
   );
 
   const totalPages = Math.ceil(allItems.length / ITEMS_PER_PAGE);
@@ -376,7 +376,7 @@ const getFilteredMetrics = () => {
         formatCurrency(item.amount),
         item.type === "payment" ? item.currency || "N/A" : "CUP",
         item.type === "payment"
-          ? formatCurrency(item.amountCUP!)
+          ? formatCurrency(item.amount_cup!)
           : formatCurrency(item.amount),
         item.status
           ? item.status === "active"
@@ -531,7 +531,7 @@ const getFilteredMetrics = () => {
         item.borrower.name,
         formatCurrency(item.amount),
         item.type === "payment" ? item.currency || "N/A" : "CUP",
-        formatCurrency(item.type === "payment" ? item.amountCUP! : item.amount),
+        formatCurrency(item.type === "payment" ? item.amount_cup! : item.amount),
         item.status
           ? item.status === "active"
             ? "Activo"
@@ -807,10 +807,10 @@ const getFilteredMetrics = () => {
               {paginatedItems.map((item, index) => (
                 <tr key={index}>
                   <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {formatDate(item.createdAt)}
+                    {formatDate(item.created_at)}
                   </td>
                   <td className="px-4 py-4 whitespace-nowrap text-sm font-medium">
-                    {"amountCUP" in item ? (
+                    {"amount_cup" in item ? (
                       <span className="text-green-600">Pago</span>
                     ) : (
                       <span className="text-blue-600">Préstamo</span>
@@ -821,8 +821,8 @@ const getFilteredMetrics = () => {
                   </td>
                   <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     {formatCurrency(
-                      "amountCUP" in item
-                        ? (item as PaymentResponse).amountCUP
+                      "amount_cup" in item
+                        ? (item as PaymentResponse).amount_cup
                         : (item as LoanResponse).amount
                     )}
                   </td>
