@@ -70,7 +70,7 @@ export default function PaymentsView() {
     resolver: zodResolver(paymentSchema),
     defaultValues: {
       currency: "USD",
-      exchangeRate: defaultExchangeRate,
+      exchange_rate: defaultExchangeRate,
       amount: 0,
       borrowerId: undefined,
     },
@@ -81,7 +81,7 @@ export default function PaymentsView() {
     if (!isDialogOpen && !isEditDialogOpen) {
       reset({
         currency: "USD",
-        exchangeRate: defaultExchangeRate,
+        exchange_rate: defaultExchangeRate,
         amount: 0,
         borrowerId: undefined,
       });
@@ -90,17 +90,17 @@ export default function PaymentsView() {
   }, [isDialogOpen, isEditDialogOpen, reset, defaultExchangeRate]);
 
   // Calcular totales
-  const totalPaymentsAmount = payments?.reduce((sum, payment) => sum + payment.amountCUP, 0) || 0;
+  const totalPaymentsAmount = payments?.reduce((sum, payment) => sum + payment.amount_cup, 0) || 0;
   const totalPaymentsCount = payments?.length || 0;
 
   // Prestatarios con resumen de pagos
 const borrowersSummary = borrowers?.map((borrower) => {
   const borrowerPayments = payments?.filter((payment) => payment.borrower.id === borrower.id) || [];
-  const totalPaid = borrowerPayments.reduce((sum, payment) => sum + payment.amountCUP, 0);
+  const totalPaid = borrowerPayments.reduce((sum, payment) => sum + payment.amount_cup, 0);
 
   // Determinar el estado basado en préstamos y pagos
   let status;
-  if (borrower.totalLoans === 0 && borrower.totalPaid === 0) {
+  if (borrower.total_loans === 0 && borrower.total_paid === 0) {
     status = "registered"; // Nuevo estado para prestatarios sin actividad
   } else if (borrower.balance > 0) {
     status = "active"; // Tiene préstamos pendientes
@@ -124,7 +124,7 @@ const borrowersSummary = borrowers?.map((borrower) => {
 
   // Calcular monto en CUP en tiempo real
   const amount = watch("amount") || 0;
-  const rate = watch("exchangeRate") || 1;
+  const rate = watch("exchange_rate") || 1;
   const cupAmount = amount * rate;
 
   // Handlers
@@ -191,7 +191,7 @@ const borrowersSummary = borrowers?.map((borrower) => {
       borrowerId: payment.borrower.id,
       amount: payment.amount,
       currency: payment.currency,
-      exchangeRate: payment.exchangeRate,
+      exchange_rate: payment.exchange_rate,
     });
   };
 
@@ -373,7 +373,7 @@ const borrowersSummary = borrowers?.map((borrower) => {
                           {payment.borrower.name}
                         </div>
                         <div className="text-sm text-gray-500 sm:hidden">
-                          {payment.currency} · {formatDate(payment.createdAt)}
+                          {payment.currency} · {formatDate(payment.created_at)}
                         </div>
                       </td>
                       <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
@@ -383,13 +383,13 @@ const borrowersSummary = borrowers?.map((borrower) => {
                         {payment.currency}
                       </td>
                       <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500 hidden md:table-cell">
-                        {payment.exchangeRate}
+                        {payment.exchange_rate}
                       </td>
                       <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {formatCurrency(payment.amountCUP)}
+                        {formatCurrency(payment.amount_cup)}
                       </td>
                       <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500 hidden sm:table-cell">
-                        {formatDate(payment.createdAt)}
+                        {formatDate(payment.created_at)}
                       </td>
                       <td className="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <div className="flex justify-end space-x-2">
@@ -469,7 +469,7 @@ const borrowersSummary = borrowers?.map((borrower) => {
                         (c) => c.code === selectedCode
                       );
                       if (selectedCurrency) {
-                        setValue("exchangeRate", selectedCurrency.exchangeRate);
+                        setValue("exchange_rate", selectedCurrency.exchange_rate);
                       }
                     }}
                     error={errors.currency?.message}
@@ -478,7 +478,7 @@ const borrowersSummary = borrowers?.map((borrower) => {
                     {currencies?.map((currency) => (
                       <option key={currency.id} value={currency.code}>
                         {currency.name} ({currency.code}) - Tasa:{" "}
-                        {currency.exchangeRate}
+                        {currency.exchange_rate}
                       </option>
                     ))}
                   </Select>
@@ -494,8 +494,8 @@ const borrowersSummary = borrowers?.map((borrower) => {
                 <Input
                   type="number"
                   step="0.01"
-                  {...register("exchangeRate", { valueAsNumber: true })}
-                  error={errors.exchangeRate?.message}
+                  {...register("exchange_rate", { valueAsNumber: true })}
+                  error={errors.exchange_rate?.message}
                 />
                 <Button
                   type="button"
@@ -588,7 +588,7 @@ const borrowersSummary = borrowers?.map((borrower) => {
                         (c) => c.code === selectedCode
                       );
                       if (selectedCurrency) {
-                        setValue("exchangeRate", selectedCurrency.exchangeRate);
+                        setValue("exchange_rate", selectedCurrency.exchange_rate);
                       }
                     }}
                     error={errors.currency?.message}
@@ -612,8 +612,8 @@ const borrowersSummary = borrowers?.map((borrower) => {
                 <Input
                   type="number"
                   step="0.01"
-                  {...register("exchangeRate", { valueAsNumber: true })}
-                  error={errors.exchangeRate?.message}
+                  {...register("exchange_rate", { valueAsNumber: true })}
+                  error={errors.exchange_rate?.message}
                 />
                 <Button
                   type="button"
@@ -643,7 +643,7 @@ const borrowersSummary = borrowers?.map((borrower) => {
           <div className="bg-blue-50 p-3 rounded-lg">
             <p className="text-sm text-blue-800">
               <span className="font-medium">Equivalente en CUP:</span>{" "}
-              {formatCurrency(watch("amount") * watch("exchangeRate"))}
+              {formatCurrency(watch("amount") * watch("exchange_rate"))}
             </p>
           </div>
 
@@ -719,13 +719,13 @@ const borrowersSummary = borrowers?.map((borrower) => {
                           {payment.currency}
                         </td>
                         <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {payment.exchangeRate}
+                          {payment.exchange_rate}
                         </td>
                         <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          {formatCurrency(payment.amountCUP)}
+                          {formatCurrency(payment.amount_cup)}
                         </td>
                         <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {formatDate(payment.createdAt)}
+                          {formatDate(payment.created_at)}
                         </td>
                       </tr>
                     ))}
