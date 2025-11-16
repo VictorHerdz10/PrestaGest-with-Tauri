@@ -1,7 +1,4 @@
-use chrono::{DateTime, Utc};
-use serde::{Deserialize, Serialize};
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone)]
 pub struct Borrower {
     pub id: i32,
     pub phone: String,
@@ -11,11 +8,11 @@ pub struct Borrower {
     pub total_paid: f64,
     pub balance: f64,
     pub status: String,
-    pub created_at: DateTime<Utc>,
-    pub updated_at: DateTime<Utc>,
+    pub created_at: String,  // Cambiar a String
+    pub updated_at: String,  // Cambiar a String
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone)]
 pub struct NewBorrower {
     pub phone: String,
     pub name: String,
