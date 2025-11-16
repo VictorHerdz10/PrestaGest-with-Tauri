@@ -13,7 +13,7 @@ export const paymentSchema = z.object({
       required_error: "La moneda es requerida",
       invalid_type_error: "La moneda es requerida",
     }),
-  exchangeRate: z
+  exchange_rate: z
     .number({
       required_error: "La tasa de cambio es requerida",
       invalid_type_error: "La tasa de cambio debe ser un número",
@@ -33,22 +33,22 @@ export interface PaymentResponse {
   id: number;
   amount: number;
   currency: string;
-  exchangeRate: number;
-  amountCUP: number;
+  exchange_rate: number;
+  amount_cup: number;
   borrower: {
     id: number;
     name: string;
     phone: string;
     location: string;
-    totalLoans: number;
-    totalPaid: number;
+    total_loans: number;
+    total_paid: number;
     balance: number;
     status: string;
-    createdAt: Date;
-    updatedAt: Date;
+    created_at: Date;
+    updated_at: Date;
   };
-  createdAt: string;
-  updatedAt: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export type PaymentErrorResponse = {
